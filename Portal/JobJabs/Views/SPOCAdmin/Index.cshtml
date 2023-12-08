@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "SPOC Admin";
+}
+<link href="@Url.Content("~/Assets/ERP/CSS/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .dashboardmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .dashboardmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+
+    .dahboardspancount {
+        color: #3F4254;
+        font-size: 25px;
+        font-weight: 600 !important;
+        line-height: 39px;
+    }
+
+    .ptb16 {
+        padding: 16px 0px 23px 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-xxl-4">
+        <!--begin::Mixed Widget 1-->
+        <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+            <!--begin::Header-->
+            <div class="card-header border-0 bg-danger py-5">
+                <h3 class="card-title font-weight-bolder text-white">Dashboard</h3>
+
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body p-0 position-relative overflow-hidden">
+                <!--begin::Chart-->
+                <div id="kt_mixed_widget_1_chart" class="card-rounded-bottom bg-danger" style="height: 60px"></div>
+                <!--end::Chart-->
+                <!--begin::Stats-->
+                <div class="card-spacer mt-n25">
+                    <!--begin::Row-->
+                    <div class="row m-0">
+                        <div class="col bg-light-warning text-warning ptb16 rounded-xl mr-7 mb-5 font-weight-bold font-size-h6 fon text-center">
+                            <span class="dahboardspancount" style="color:#3F4254">255</span> <br />
+                            Total <br /> Line Ups
+                        </div>
+                        <div class="col bg-light-primary text-primary ptb16 rounded-xl mr-7 mb-5  font-weight-bold font-size-h6 fon text-center">
+                            <span class="dahboardspancount" style="color:#3F4254">210</span> <br />
+                            Total <br />Confirmed Interviews
+                        </div>
+                        <div class="col bg-light-danger text-danger ptb16 rounded-xl mr-7 mb-5  font-weight-bold font-size-h6 fon text-center">
+                            <span class="dahboardspancount" style="color:#3F4254">2010</span> <br />
+                            Total <br /> Candidates
+                        </div>
+                        <div class="col bg-light-success text-success ptb16 rounded-xl mr-7 mb-5  font-weight-bold font-size-h6 fon text-center">
+                            <span class="dahboardspancount" style="color:#3F4254">230</span> <br />
+                            Total <br />Candidate Joined
+                        </div>
+                        <div class="col bg-light-warning text-warning ptb16 rounded-xl  mb-5 font-weight-bold font-size-h6 fon text-center">
+                            <span class="dahboardspancount" style="color:#3F4254">142</span> <br />
+                            Total <br /> Points
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Stats-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 1-->
+    </div>
+    <div class="col-lg-12 col-xxl-12">
+        <!--begin::Card-->
+        <div class="card card-custom card-shadowless rounded-top-0">
+            <!--begin::Body-->
+            <div class="card-body p-0">
+                <div class="row justify-content-center ">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="table1main">
+                            <div class="theader">
+                                <span class="tspan"> List Of Jobs</span>
+                            </div>
+                            <div class="tbody">
+                                <table id="table1" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding-left:5px !important">Job Title</th>
+                                            <th>Comapny</th>
+                                            <th>Location</th>
+                                            <th>CTC</th>
+                                            <th>No Of Position</th>
+                                            <th>Interview Date</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>Business Development Manager</td>
+                                            <td>Toppr</td>
+                                            <td>Mumbai</td>
+                                            <td>Upto 7 Lakhs</td>
+                                            <td>5</td>
+                                            <td>5 Nov 2020</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java Developer</td>
+                                            <td>Cogitate</td>
+                                            <td>Mumbai</td>
+                                            <td>Upto 15 Lakhs</td>
+                                            <td>1</td>
+                                            <td>10 Nov 2020</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sales Officer</td>
+                                            <td>Reliance Life</td>
+                                            <td>Nodia</td>
+                                            <td>Upto 5 Lakhs</td>
+                                            <td>10</td>
+                                            <td>7 Nov 2020</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dotnet Developer</td>
+                                            <td>Appsure</td>
+                                            <td>Delhi</td>
+                                            <td>Upto 8 Lakhs</td>
+                                            <td>3</td>
+                                            <td>12 Nov 2020</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Salesforce Developer</td>
+                                            <td>Salesforce India</td>
+                                            <td>Delhi</td>
+                                            <td>Upto 18 Lakhs</td>
+                                            <td>3</td>
+                                            <td>15 Nov 2020</td>
+                                        </tr>
+                                    </tbody>
+
+
+                                </table>
+                            </div>
+                        </div>
+                        <!--begin::Wizard Form-->
+                        <!--end::Wizard Form-->
+                    </div>
+                </div>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Card-->
+
+    </div>
+
+</div>
+
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.display').DataTable();
+
+    });
+</script>
+

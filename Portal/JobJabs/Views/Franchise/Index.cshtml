@@ -1,0 +1,339 @@
+﻿@using JobJabs.Entity;
+@using JobJabs.ViewModel;
+@model VM_FranchiseEnquiry
+@{
+    ViewBag.Title = "Franchise";
+}
+
+<style>
+    p {
+        margin: 0 0px 24px 10px;
+        line-height: 23px;
+        font-size: 15px;
+    }
+
+    .franchiseselected a {
+        border-bottom-color: #fecc17 !important;
+        color: #fecc17 !important;
+    }
+
+    .job_tags {
+        margin: 0 0px 10px 10px !important;
+    }
+
+    .lineheight40 {
+        line-height: 40px;
+    }
+
+    .form-group {
+        height: 55px;
+    }
+
+    .submit_btn {
+        width: 170px;
+        border: 1px solid #f8395d;
+        background-color: #f8395d;
+        display: inline-block;
+        text-align: center;
+        height: 45px;
+        line-height: 45px;
+        padding: 0px;
+        border-radius: 5px;
+        outline: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        font-size: 15px;
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+        -webkit-transition: all 400ms linear 0s;
+        -o-transition: all 400ms linear 0s;
+        transition: all 400ms linear 0s;
+        overflow: hidden;
+    }
+
+        .submit_btn:hover, .submit_btn:focus {
+            color: #f8395d;
+            background: transparent;
+            border-color: #f8395d;
+        }
+
+    .mj_mainheading h3 {
+        text-align: center;
+    }
+
+        .mj_mainheading h3::after {
+            border-bottom: 0px !important;
+        }
+
+    .stateselect 
+    {
+        width: 100%;
+        padding: 12px 19px;
+        font-size: 15px;
+        box-shadow: none;
+        background-color: #f5f5f5;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+        
+</style>
+
+<div class="mj_pagetitle2">
+    <div class="mj_pagetitleimg">
+        <img src="@Url.Content("~/Assets/Portal/themes/meshjobs/images/job_detail_benner.jpg")" alt="">
+        <div class="mj_mainheading_overlay"></div>
+    </div>
+    <div class="mj_pagetitle_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mj_mainheading">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="mj_joblogo">
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="mj_pageheading mj_toppadder50 ">
+                                    <h1>Franchise</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mj_lightgraytbg mj_bottompadder80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="mj_postdiv mj_jobdetail mj_toppadder50 mj_bottompadder50">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+                        <div class="row">
+                            <h3 style="margin-bottom:30px;">
+                                Franchise:
+                            </h3>
+                            <p>
+                                Here is an opportunity to build your own business as a Jobjabs.com Franchisee.
+                                We service our clients with a host of HR solutions, encompassing Recruitment and Corporate Training. We are reputed for delivering effective results consistently with focus, understanding and forever emphasis on quality.
+                                Our next phase of expansion is to franchise to budding entrepreneurs across India. With a progressive franchisee investment proposal the only attributes we are looking in our franchisee partner is dedication, enthusiasm & desire to excel.
+                            </p>
+                            <p>
+                                <b class="lineheight40"> What is franchising?</b><br />
+                                Franchising is the legal right to carry out a business in accordance with a particular operational method and under a specific brand. This includes the right to use trademarks, logos, a business system, operating procedures, IT and marketing techniques.
+                                It can be seen as you working for yourself and running your own business; however, you go to market with the benefits of a household name and a dedicated team supporting you with advice and guidance on how to operate effectively.
+                            </p>
+                            <p>
+                                <b class="lineheight40"> What does a Recruitment Agency Franchise do?</b><br />
+                                A Recruitment agency franchise will gather CVs from a wide variety of people looking for work and match their skills and experience to any vacancies that arise. For employers this means the right workers will literally turn up on their doorstep, and for job seekers, having an agency sift through vacancies to find the ones of interest is an attractive choice.
+                                With millions of people out there looking for work and companies eager to pay agencies to find the right candidates, success is almost guaranteed
+                            </p>
+                            <p>
+                                <b class="lineheight40">We offer our Franchisee with following facilities:</b><br />
+                                • Use of our Brand Name Jobjabs.com for all corporate communications. No need to form a company.<br />
+                                • Use of Company's Logo, Designing etc.<br />
+                                • Complete Operational Training to the Franchisee Staff. Expert Training to staff so that faults due to inexperience can be avoided.<br />
+                                • Jobseeker’s Database from Various Job Portals for All India. - No need to spend Lacs on Data portals. Dedicated Access to job portals &nbsp;- at lower cost than market.<br />
+                                • Proper expert guidance on each and daily activity to avoid any loss due to inexperience of trade. Continuous guidance on sourcing against typical requirements (Sourcing methods, target companies, etc.)<br />
+                                • All online promotion of franchisee from Head Office No need to invest single penny on online promotions or on SEO.<br />
+                                • Social connectivity like job posting and sharing with Facebook, linkedin, twitter etc. No need to maintain various accounts on Facebook, Twitter, Linkedin.<br />
+                                • Back office operations - Centralized Invoicing & Collections .No need of maintenance of Account. Head Office will maintain all record of payment. No need to invest on Tally or on invoice softwares.<br />
+                                • Infrastructure Guidance- Infrastructural equipment, Office layout plan, etc.
+
+                            </p>
+
+                            <p>
+                                <b class="lineheight40">What are Franchising Benefits..?</b><br />
+                                • You are granted with a license to trade as a Jobjabs.<br />
+                                • You will benefit from being part of our group, including ground representation.<br />
+                                • You have your name, address, contact number on our website.<br />
+                                • You receive a national advertising and marketing program that will continually reinforce our distinctive brand image.<br />
+                                • You have all of your processing done through system by our head office, enabling you to focus on generating more sales.<br />
+                                • You receive Staff Training.
+
+                            </p>
+
+                            <p>
+                                <b class="lineheight40"> What are Pre Requisites..?</b><br />
+                                • Good reputation and contacts in the area.<br />
+                                • Suitable office space and computer with internet access.<br />
+                                • Initial investment of Rs. 2,00,000/- towards franchise deposit*<br />
+                                • Willingness to undertake aggressive local promotions.<br />
+                                • Familiarization with placement industry or IT enabled services shall be considered as an added advantage.<br />
+                                • Business Acumen and drive to succeed.<br />
+                                • Entrepreneurship Skills, Business Sense and a Creative Mind make the perfect combination to successfully run a Career Placements Franchisee.<br />
+                            <p>
+                                <b class="lineheight40"> How to Empanel?</b><br />
+                                <span style="line-height:35px;">
+                                    Send your query to ashwith@jobjabs.com/ pranay@jobjabs.com or fill the Contact Us form available on the website.
+                                </span>
+                                You will receive an e-mail with an Agreement and Presentation file.<br /><br />
+                                Send the signed copy of the Agreement on Rs.100 Stamp paper along with<br />
+                                a. Id Proof<br />
+                                b. Address Proof<br />
+                                c. 2 Passport size photos<br />
+                                <span style="line-height:25px;">
+                                    and courier back to Jobjabs.com along with the Cheque or DD of Rs. 2,00,000/- as Franchise Deposit in favor of “Jobjabs.com”.
+                                </span>
+                                <br />     <br />
+                                <span style="line-height:30px;">Agreement signed and couriered back to</span> <br />
+                                Jobjabs.com<br />
+                                C-121, Regency Plaza First Floor,<br />
+                                Kalyan Ambarnath Road, Near Valdhuni Bridge, <br />
+                                Ulhasnagar - 421003,<br />
+                                Maharashtra, India.<br />
+                                Phone no: +91 8850640288<br />
+
+                                <span style="line-height:45px;">
+                                    Upon receipt of all the documents, we shall courier you back your copy and a certificate to commence business under our brand.
+                                </span> <br />
+                            </p>
+                            <p>
+                                <b class="lineheight40">   Where can I open a franchise center?</b><br />
+                                Anywhere in India, where you get a decent candidate population
+                            </p>
+
+                            <p>
+                                <b class="lineheight40">I have an existing Recruitment office; can I get Jobjabs franchise?</b><br />
+                                Jobjabs franchise could be granted to you as per the normal qualification process; however, on receiving the same, you will require to continue with only the Jobjabs format & franchise.
+                            </p>
+                            <p>
+                                <b class="lineheight40">What is the availability of opportunities in my area of interest?</b><br />
+                                The availability of franchises in specific geographic areas must be discussed with the management of Jobjabs for the specific area for which you have interest. However, the availability of the locations may wary by the time the franchise qualification is complete. Therefore, geographic flexibility is a characteristic we seek in our franchises.
+
+                            </p>
+                            <p>
+                                <b class="lineheight40">The fees that you need to pay ...</b><br />
+                                An Initial refundable security deposit Fee of Rs 200,000. per office. Please refer to the Franchising Benefits section for further details.*
+                                Applicants will need to have additional funds to cover working capital and purchase price for an existing agency or fit out costs for a new agency.
+
+                            </p>
+                            <p>
+                                <b class="lineheight40">What can be the rate of return, which I/We can expect?</b><br />
+                                On account of confidentiality, we cannot reveal the exact details. However, after the preliminaries and the investigative report, we would be happy to discuss the financial returns in a personal meeting.
+                            </p>
+
+                            <p>
+                                <b class="lineheight40"> Jobjabs Franchise Opportunity</b><br />
+                                • Extremely profitable with an estimated payback period of 6 to 9 months<br />
+                                • Satisfying work as we assist people to find the right job and, consequently, happiness in life.<br />
+                                • Provide customized solutions.<br />
+                                • Individual attention.<br />
+                                • Work with a professional team with high standards of business ethics.<br />
+                                • Utilize an existing, successful brand and proven methodology.<br />
+                                <br />
+                                We believe in unity and therefore we offer our franchisee in your area. If you have the passion of recruiting we welcome you to our Jobjabs family.<br />
+                                <br />
+                                If you want more details for becoming our Franchisee partner or have queries, please either drop an email at  <br />
+                                ashwith@jobjabs.com/ pranay@jobjabs.com or you can contact us on Phone no: +91 8850640288/8624809133
+                                <br /> <br />
+                                Join Us and Grow with us..
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="mj_contact_form">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+                        <div class="mj_mainheading mj_toppadder30 mj_bottompadder20">
+                            <h3 style="text-align:center; border:0 !important ">Franchise Enquiry </h3>
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("Index", "Franchise", FormMethod.Post, new { @class = "comment_form_inner", @id = "frmFranchise" }))
+                    {
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-1">
+                            <div class="row">
+                                @if (Model.StepNo == 2)
+                                {
+                                    <div class="field-validation-error" style="margin-left: 128px;color:red;margin-top: -15px; " id="spResumeMsg">
+                                        <span id="Name-error" class="" style="font-size :13px; ">Thank You For Your Interest. We Will Be In Touch Soon!</span>
+                                    </div>
+                                }
+                                <div class="form-group">
+                                    @Html.TextBoxFor(r => r.MailMsg.Name, new { @class = "form-control", @MaxLength = "50", @placeholder = "Name" })
+                                    @Html.ValidationMessageFor(r => r.MailMsg.Name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(r => r.MailMsg.Email, new { @class = "form-control", @type = "email", @MaxLength = "60", @placeholder = "Email Address" })
+                                    @Html.ValidationMessageFor(r => r.MailMsg.Email)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(r => r.MailMsg.ContactNumber, new { @class = "form-control", @MaxLength = "10", @placeholder = "Contact Number" })
+                                    @Html.ValidationMessageFor(r => r.MailMsg.ContactNumber)
+                                </div>
+                                <div class="form-group">
+                                    <select id="MailMsg.State"  class="stateselect" name="MailMsg.State">
+                                        <option value="Andhra Pradesh" selected>Andhra Pradesh</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                        <option value="Daman and Diu">Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(r => r.MailMsg.State)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(r => r.MailMsg.City, new { @class = "form-control", @MaxLength = "25", @placeholder = "City" })
+                                    @Html.ValidationMessageFor(r => r.MailMsg.City)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextAreaFor(r => r.MailMsg.Body, new { @class = "form-control", @MaxLength = "1000", @placeholder = "Message" })
+                                    @Html.ValidationMessageFor(r => r.MailMsg.Body)
+                                </div>
+                                <div class="form-group" style="margin-top: 75px;text-align: right;">
+                                    @Html.HiddenFor(r => r.MailMsg.Subject)
+                                    <button class="submit_btn" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

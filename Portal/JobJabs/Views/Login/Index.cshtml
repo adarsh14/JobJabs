@@ -1,0 +1,164 @@
+﻿@using JobJabs.Entity
+@model JobJabs.ViewModel.VM_Login
+@{
+    Layout = null;
+    SessionClass session = new SessionClass();
+}
+<style type="text/css">
+    .textshadow {
+        text-shadow: 1px 0px red, 0px 1px red, 2px 1px red, 1px 2px #ccc, 3px 2px #eee, 2px 3px #ccc, 4px 3px #eee, 3px 4px #ccc, 5px 4px #eee, 4px 5px #ccc, 6px 5px #eee, 5px 6px #ccc, 7px 6px #eee, 6px 7px #ccc, 8px 7px #eee, 7px 8px red, 8px 8px red;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="../../../">
+    <meta charset="utf-8" />
+    <title>JobJabs</title>
+    <meta name="description" content="Add user example" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="canonical" href="https://keenthemes.com/metronic" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Custom Styles(used by this page)-->
+    <link href="@Url.Content("~/assets/ERP/css/pages/login/login-1.css")" rel="stylesheet" type="text/css" />
+    <!--end::Page Custom Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="@Url.Content("~/assets/ERP/plugins/global/plugins.bundle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/ERP/plugins/custom/prismjs/prismjs.bundle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/ERP/css/style.bundle.css")" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <link href="@Url.Content("~/assets/ERP/css/themes/layout/header/base/light.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/ERP/css/themes/layout/header/menu/light.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/ERP/css/themes/layout/brand/dark.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/ERP/css/Custom.css")" rel="stylesheet" type="text/css" />
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" href="@Url.Content("~/Assets/Portal/Images/logo.png")" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Login-->
+        <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+            <!--begin::Aside-->
+            <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+                <!--begin::Aside Top-->
+                <div class="d-flex flex-column-auto flex-column pt-lg-10 pt-15">
+                    <!--begin::Aside header-->
+                    <a href="#" class="text-center mb-5">
+                        <img src="https://jobjabs.com/assets/Portal/images/logo.png" class="max-h-110px" alt="" />
+                    </a>
+                    <!--end::Aside header-->
+                    <!--begin::Aside title-->
+                    <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
+                        Franchise
+                        <br /><span style="color:darkcyan;font-size:20px;line-height:37px;">Join Us and Grow with us</span>
+                    </h3>
+                    <!--end::Aside title-->
+                </div>
+                <!--end::Aside Top-->
+                <!--begin::Aside Bottom-->
+                <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/ERP/media/svg/illustrations/login-visual-1.svg)"></div>
+                <!--end::Aside Bottom-->
+            </div>
+            <!--begin::Aside-->
+            <!--begin::Content-->
+            <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+                <!--begin::Content body-->
+                <div class="d-flex flex-column-fluid flex-center">
+                    <!--begin::Signin-->
+                    <div class="login-form login-signin">
+                        <!--begin::Form-->
+                        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @id = "frmLogin" }))
+                        {
+
+                            <!--begin::Title-->
+                            <div class="pb-13 pt-lg-0 pt-5">
+                                <div class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg" style="text-align:center">
+                                    <h3>Welcome to SmartSpar</h3>
+                                </div>
+                                <div style="text-align:center">
+                                    <span class="text-muted font-italic" style="font-size:14px;">
+                                        One point solution for your a11
+                                        <a href="javascript:;" id="kt_login_signup" class="text-primary  font-weight-bold ">
+                                            Recruitment
+                                        </a> business needs.
+                                    </span>
+                                </div>
+                            </div>
+                            if(!string.IsNullOrEmpty(Model.Message))
+                            {
+                                <!--begin::Message-->
+                                <div class="form-group">
+                                    <div class="form-group row" style="text-align: center;margin-top: -20px;">
+                                        <label class="col-xl-12 col-lg-12 col-form-label" style="color:red;">@(Model.Message)</label>
+                                    </div>
+                                </div>
+                                <!--end::Message-->
+                            }
+                            <!--begin::Form group-->
+                            <div class="form-group">
+                                <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
+
+                                @Html.TextBoxFor(r => r.LoginName, new { @class = "form-control form-control-solid h-auto py-6 px-6 rounded-lg", @MaxLength = "50", @autocomplete = "off" })
+                                @Html.ValidationMessageFor(r => r.LoginName)
+                            </div>
+                            <!--end::Form group-->
+                            <!--begin::Form group-->
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between mt-n5">
+                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
+                                </div>
+                                @Html.PasswordFor(r => r.Password, new { @class = "form-control form-control-solid h-auto py-6 px-6 rounded-lg", @MaxLength = "50", @autocomplete = "off" })
+                                @Html.ValidationMessageFor(r => r.Password)
+                            </div>
+                            <!--end::Form group-->
+                            <!--begin::Action-->
+                            <div class="pb-lg-0 pb-5">
+                                <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                            </div>
+                            <!--end::Action-->
+                        }
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Signin-->
+
+
+                </div>
+                <!--end::Content body-->
+                <!--begin::Content footer-->
+                <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+                    <!--begin::Container-->
+                    <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+                        <!--begin::Copyright-->
+                        <div class="text-dark order-2 order-md-1">
+                            <span class="text-muted font-weight-bold mr-2">2020©</span>
+                            <a href="https://Jobjabs.com" target="_blank" class="text-dark-75 text-hover-primary">JobJabs</a>
+                        </div>
+                        <!--end::Copyright-->
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Footer-
+                <!--end::Content footer-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Login-->
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+</body>
+<!--end::Body-->
+</html>

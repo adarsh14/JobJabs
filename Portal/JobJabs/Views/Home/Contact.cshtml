@@ -1,0 +1,156 @@
+﻿@using JobJabs.Entity;
+@using JobJabs.ViewModel;
+@model VM_Home
+@{
+    ViewBag.Title = "Contact";
+}
+<style>
+    .contactselected a {
+        border-bottom-color: #fecc17 !important;
+        color: #fecc17 !important;
+    }
+    .form-group {
+        height: 55px;
+    }
+
+    .submit_btn {
+        width: 170px;
+        border: 1px solid #f8395d;
+        background-color: #f8395d;
+        display: inline-block;
+        text-align: center;
+        height: 45px;
+        line-height: 45px;
+        padding: 0px;
+        border-radius: 5px;
+        outline: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        font-size: 15px;
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+        -webkit-transition: all 400ms linear 0s;
+        -o-transition: all 400ms linear 0s;
+        transition: all 400ms linear 0s;
+        overflow: hidden;
+    }
+
+        .submit_btn:hover, .submit_btn:focus {
+            color: #f8395d;
+            background: transparent;
+            border-color: #f8395d;
+        }
+
+    .mj_mainheading h3 {
+        text-align: center;
+    }
+    /*.mj_mainheading h3::after {
+        border-bottom: 0px !important;
+    }*/
+</style>
+<div class="container">
+    <div class="row mj_bottompadder50">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="mj_contact_info mj_bottompadder80" style="margin-top:50px;">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+                    <div class="mj_mainheading mj_toppadder50 mj_bottompadder50">
+                        <h3>Contact Information</h3>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="mj_contact_detail_img">
+                                <img src="@Url.Content("~/Assets/Portal/themes/meshjobs/images/contact_icon1.jpg")" alt="marker" />
+                            </div>
+                            <div class="mj_contact_detail">
+                                <p>
+                                    <b>Head Office :</b> <br />
+                                    <b>SPAR Business Services Pvt.Ltd.</b> <br />
+                                    401, Gulmohar CHS. Flower Valley Complex. Khadakpada circle. <br /> Kalyan (w). Dist.-Thane. Maharashtra.<br /> Pin Code - 421301.
+                                </p>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                <div class="mj_contact_detail" >
+                                    <p><b>North HUB :</b><br /> C-276, Sector 63, <br />Noida – 201301</p>
+                                </div>
+                            </div>*@
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="padding: 0px !important;">
+                            <div class="mj_contact_detail_img">
+                                <img src="@Url.Content("~/Assets/Portal/themes/meshjobs/images/contact_icon2.jpg")" alt="marker" />
+                            </div>
+                            <div class="mj_contact_detail" style="width:80%">
+                                <p>Mobile : + 91 8850640288 </p>
+                                <p>For Franchise Enquiry : + 91 8624809133</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="mj_contact_detail_img">
+                                <img src="@Url.Content("~/Assets/Portal/themes/meshjobs/images/contact_icon3.jpg")" alt="marker" />
+                            </div>
+                            <div class="mj_contact_detail">
+                                <p><a>Pranay@jobjabs.com</a></p>
+                                <p><a>ashwith@jobjabs.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mj_bottompadder80">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="mj_contact_form">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+                    <div class="mj_mainheading mj_toppadder30 mj_bottompadder20">
+                        <h3>Get In Touch </h3>
+                    </div>
+                </div>
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "comment_form_inner", @id = "frmContact" }))
+                {
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-1">
+                        <div class="row">
+                            @if (Model.StepNo == 2)
+                            {
+                                <div class="field-validation-error" style="margin-left: 128px;color:red;margin-top: -15px; " id="spResumeMsg">
+                                    <span id="Name-error" class="" style="font-size :13px; ">Thank You For Your Interest. We Will Be In Touch Soon!</span>
+                                </div>
+                            }
+                            <div class="form-group">
+                                @Html.TextBoxFor(r => r.MailMsg.Name, new { @class = "form-control", @MaxLength = "50", @placeholder = "Name" })
+                                @Html.ValidationMessageFor(r => r.MailMsg.Name)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(r => r.MailMsg.Email, new { @class = "form-control", @type = "email", @MaxLength = "60", @placeholder = "Email Address" })
+                                @Html.ValidationMessageFor(r => r.MailMsg.Email)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(r => r.MailMsg.ContactNumber, new { @class = "form-control", @MaxLength = "10", @placeholder = "Contact Number" })
+                                @Html.ValidationMessageFor(r => r.MailMsg.ContactNumber)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(r => r.MailMsg.Subject, new { @class = "form-control", @MaxLength = "100", @placeholder = "Subject" })
+                                @Html.ValidationMessageFor(r => r.MailMsg.Subject)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextAreaFor(r => r.MailMsg.Body, new { @class = "form-control", @MaxLength = "1000", @placeholder = "Message" })
+                                @Html.ValidationMessageFor(r => r.MailMsg.Body)
+                            </div>
+                            <div class="form-group" style="margin-top: 75px;text-align: right;">
+                                <button class="submit_btn" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

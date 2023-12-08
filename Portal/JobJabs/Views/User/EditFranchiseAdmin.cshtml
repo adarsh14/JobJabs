@@ -1,0 +1,208 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_AddNewFranchise
+@{
+    ViewBag.Title = "Edit Franchise Admin";
+}
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/User?UserType=" +(int)CommonClass.enumUserType.SuperAdmin))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">1</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Super Admin</div>
+                                <div class="wizard-desc">All Active Super Admin Information</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/User?UserType=" +(int)CommonClass.enumUserType.SPOCAdmin))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">2</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">SPOC</div>
+                                <div class="wizard-desc">All Active SPOC Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current" onclick="window.location.href = '@(Url.Content("~/User/FranchiseList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">3</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Franchise Admin</div>
+                                <div class="wizard-desc">All Active Franchise Admin Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/User/RecruiterList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">4</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Recruiter</div>
+                                <div class="wizard-desc">All Active Recruiter Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("EditFranchiseAdmin", "User", FormMethod.Post, new { @class = "form" }))
+                            {
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-10">@(CommonClass.UserTypeText(Model.FranchiseDetail.UserType))'s Profile Details:</h5>
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Name</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.FranchiseName, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.FranchiseName)
+                                                    @Html.HiddenFor(r => r.FranchiseDetail.FranchiseId)
+                                                    @Html.HiddenFor(r => r.FranchiseDetail.UserId)
+                                                    @Html.HiddenFor(r => r.FranchiseDetail.UserType)
+                                                    @Html.HiddenFor(r => r.FranchiseDetail.GenderId)
+                                                    @Html.HiddenFor(r => r.FranchiseDetail.UserName)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Admin First Name</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Firstname, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Firstname)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Admin Last Name</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Lastname, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Lastname)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Address Line 1</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Address1, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Address1)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Address Line 2</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Address2, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Address2)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Location</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Area, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Area)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Pincode</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.Pincode, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.Pincode)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.City, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.City)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.State, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.State)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Mobile Number</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.FranchisePhone1, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.FranchisePhone1)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise Altername Mobile Number</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.FranchisePhone2, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.FranchisePhone2)
+                                                </div>
+                                            </div>
+                                            <!--end::Group--> <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Franchise EmailId</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.FranchiseDetail.FranchiseEmail, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.FranchiseDetail.FranchiseEmail)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--end::Group-->
+                                        </div>
+                                        <!--end::Wizard Step 1-->
+                                        <!--begin::Wizard Actions-->
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                            <div>
+                                                <button type="submit" style="display:inline !important" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!--end::Wizard Actions-->
+                                    </div>
+                                </div>
+
+                            }
+
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->

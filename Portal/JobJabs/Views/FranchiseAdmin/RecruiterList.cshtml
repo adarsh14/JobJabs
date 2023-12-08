@@ -1,0 +1,117 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_UserList
+@{
+    ViewBag.Title = "Recruiter List";
+}
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .rclistmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .rclistmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">1</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Recruiter</div>
+                                <div class="wizard-desc">All Recruiter Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class=" card-custom card-shadowless rounded-top-0" style="margin-top:20px; ">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center ">
+                        <div class="col-xl-12 col-xxl-10">
+                            <div class="table1main">
+                                <div class="theader">
+                                    <span class="tspan"> List Of Recruiter</span>
+                                </div>
+                                <div class="tbody">
+                                    <!--begin::Wizard Form-->
+                                    <table id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th title="Field #1">User Name</th>
+                                                <th title="Field #2"> Name</th>
+                                                <th title="Field #4">Mobile Number</th>
+                                                <th title="Field #5">Alternate Number</th>
+                                                <th title="Field #6">Email</th>
+                                                <th title="Field #7">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.UserList.Count > 0)
+                                            {
+                                                foreach (UserDetail user in Model.UserList)
+                                                {
+                                                    <tr>
+                                                        <td>@(user.UserName)</td>
+                                                        <td>@(user.Firstname + " " + user.Lastname)</td>
+                                                        <td>@(user.Phone1)</td>
+                                                        <td>@(user.Phone2)</td>
+                                                        <td>@(user.Email)</td>
+                                                        <td class="text-center">
+                                                            @if (user.Status == 0)
+                                                            {
+                                                                <span class="label label-lg label-light-warning label-inline">New</span>
+                                                            }
+                                                            else if (user.Status == 1)
+                                                            {
+                                                                <span class="label label-lg label-light-success label-inline">Active</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="label label-lg label-light-danger label-inline">Inactive</span>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="6" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--end::Wizard Form-->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>

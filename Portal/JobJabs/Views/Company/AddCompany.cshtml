@@ -1,0 +1,169 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_AddNewCompany
+@{
+    ViewBag.Title = "Add Company";
+}
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">C</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Company Detail</div>
+                                <div class="wizard-desc">Add Company Information</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("AddCompany", "Company", FormMethod.Post, new { @class = "form" }))
+                            {
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-10">Company Detail:</h5>
+                                            <!--begin::Group-->
+                                            @if (!string.IsNullOrEmpty(Model.Message))
+                                            {
+                                                <div class="form-group row" style="text-align: center;margin-top: -20px;">
+                                                    <label class="col-xl-12 col-lg-12 col-form-label" style="color:red;">@(Model.Message)</label>
+                                                </div>
+                                            }
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Name</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.CompanyName, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.CompanyName)
+                                                    @Html.HiddenFor(r => r.CompanyDetail.CompanyId)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Address Line 1</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.Address1, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.Address1)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Address Line 2</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.Address2, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.Address2)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Location</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.Area, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.Area)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Pincode</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.Pincode, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.Pincode)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.City, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.City)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.State, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.State)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Mobile Number</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.CompanyPhone1, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.CompanyPhone1)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company Altername Mobile Number</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.CompanyPhone2, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.CompanyPhone2)
+                                                </div>
+                                            </div>
+                                            <!--end::Group--> <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Company EmailId</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    @Html.TextBoxFor(r => r.CompanyDetail.CompanyEmail, new { @class = "form-control form-control-solid form-control-lg" })
+                                                    @Html.ValidationMessageFor(r => r.CompanyDetail.CompanyEmail)
+                                                </div>
+                                            </div>
+                                            <!--end::Group-->
+                                            <!--end::Group-->
+                                        </div>
+                                        <!--end::Wizard Step 1-->
+                                        <!--begin::Wizard Actions-->
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                            <div>
+                                                <button type="submit" style="display:inline !important" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!--end::Wizard Actions-->
+                                    </div>
+                                </div>
+
+                            }
+
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->

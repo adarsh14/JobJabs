@@ -1,0 +1,267 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_UserList
+@{
+    ViewBag.Title = "User List";
+    SessionClass session = new SessionClass();
+}
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .ml-2 .b2:after {
+        display: inline-block;
+        margin-left: .255em;
+        content: "";
+        border-top: .3em solid transparent;
+        border-right: 0;
+        border-bottom: .3em solid transparent;
+        border-left: .3em solid;
+        font-size: 20px !important;
+        margin-top: -2px !important;
+    }
+</style>
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="@(Model.UserType==(int)CommonClass.enumUserType.SPOCAdmin?"current":"")" onclick="window.location.href = '@(Url.Content("~/User?UserType=" +(int)CommonClass.enumUserType.SPOCAdmin))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">2</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">SPOC</div>
+                                <div class="wizard-desc">All Active SPOC Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="@(Model.UserType==(int)CommonClass.enumUserType.FranchiseAdmin?"current":"")" onclick="window.location.href = '@(Url.Content("~/User/FranchiseList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">3</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Franchise Admin</div>
+                                <div class="wizard-desc">All Active Franchise Admin Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="@(Model.UserType==(int)CommonClass.enumUserType.FranchiseRecruiter?"current":"")" onclick="window.location.href = '@(Url.Content("~/User/RecruiterList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">4</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Recruiter</div>
+                                <div class="wizard-desc"> All Active Recruiter Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-8 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+
+                            <div class="btn-group ml-2" style="margin-bottom:10px;float:right" onclick="window.location.href = '@(Url.Content("~/User/"+ CommonClass.AddButtonLink(Model.UserType)))';">
+                                <button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">@(CommonClass.AddButtonText(Model.UserType))</button>
+                                <button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split b2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            </div>
+                            @if (Model.FranchiseList.FranchiseDetail.Count > 0)
+                            {
+                                using (Html.BeginForm("RecruiterList", "User", FormMethod.Post))
+                                {
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <div class="col-lg-6 col-xl-5">
+                                            @Html.DropDownListFor(r => r.FranchiseId, new SelectList(Model.FranchiseList.FranchiseDetailDropDown, "Value", "Text", Model.FranchiseId), new { onchange = "this.form.submit();", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                }
+                            }
+                            <!--begin::Wizard Form-->
+                            <table id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th title="Field #2"> Name<br />User Name</th>
+                                        <th title="Field #4">Mobile Number</th>
+                                        <th title="Field #6">Email</th>
+                                        @if (Model.UserType == (int)CommonClass.enumUserType.SPOCAdmin)
+                                        {
+                                            <th title="Field #6">Assigned Franchises</th>
+                                        }
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UserList.Count > 0)
+                                    {
+                                        foreach (UserDetail user in Model.UserList)
+                                        {
+                                            <tr>
+                                                <td>@(user.Firstname + " " + user.Lastname) <br />@(user.UserName) </td>
+                                                <td>@(user.Phone1)<br />@(user.Phone2)</td>
+                                                <td>@(user.Email)</td>
+                                                @if (Model.UserType == (int)CommonClass.enumUserType.SPOCAdmin)
+                                                {
+                                                <td class="text-center">
+                                                    <a title="Assign Franchise" href="@(Url.Content("~/User/AssignFranchise?spid="+ user.UserId + "&un=" + user.UserName))" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                                                        @(user.TotalAssignedFranchise)
+                                                    </a>
+                                                </td>
+                                                }
+                                                <td class="text-center">
+                                                    @if (user.Status == 0)
+                                                    {
+                                                        <span class="label label-lg label-light-warning label-inline">New</span>
+                                                    }
+                                                    else if (user.Status == 1)
+                                                    {
+                                                        <span class="label label-lg label-light-success label-inline">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-lg label-light-danger label-inline">Inactive</span>
+                                                    }
+                                                </td>
+                                                <td class="text-center" style="width:150px;">
+                                                    @if (user.Status == 0 || user.Status == 2)
+                                                    {
+                                                        <a href="@(Url.Content("~/User/ChangeUserStatus?sts=1&UserId=" + user.UserId + "&uty=" + user.UserType))" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                                                            <span title="Make Active" class="svg-icon svg-icon-md svg-icon-primary">
+                                                                <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Settings-1.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                                        <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000"></path>
+                                                                        <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3"></path>
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                        </a>
+                                                    }
+
+                                                    @if (user.Status == 0 || user.Status == 1)
+                                                    {
+                                                        <a title="Edit" href="@(Url.Content("~/User/EditUser?UserId=" + user.UserId))" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                                                            <span title="Edit" class="svg-icon svg-icon-md svg-icon-primary">
+                                                                <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Write.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                                        <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>
+                                                                        <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                        </a>
+                                                    }
+
+
+                                                    @if (user.Status == 1)
+                                                    {
+                                                        
+
+                                                        <a href="@(Url.Content("~/User/ChangeUserStatus?Sts=2&UserId="+ user.UserId+ "&uty="+ user.UserType))" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                                                            <span title="Make Inactive" class="svg-icon svg-icon-md svg-icon-primary">
+                                                                <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Trash.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                                        <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                        <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                        </a>
+                                                    }
+                                                    @if (session.UserDetail.UserType == (int)CommonClass.enumUserType.SuperAdmin)
+                                                    {
+                                                        <a href="javascript:void('0')" onclick="ResetPassword(@user.UserId)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                                                            <span title="Reset Password" class="svg-icon svg-icon-md svg-icon-primary">
+                                                                <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Settings-1.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                                        <polygon fill="#000000" opacity="0.3" transform="translate(8.885842, 16.114158) rotate(-315.000000) translate(-8.885842, -16.114158) " points="6.89784488 10.6187476 6.76452164 19.4882481 8.88584198 21.6095684 11.0071623 19.4882481 9.59294876 18.0740345 10.9659914 16.7009919 9.55177787 15.2867783 11.0071623 13.8313939 10.8837471 10.6187476"></polygon>
+                                                                        <path d="M15.9852814,14.9852814 C12.6715729,14.9852814 9.98528137,12.2989899 9.98528137,8.98528137 C9.98528137,5.67157288 12.6715729,2.98528137 15.9852814,2.98528137 C19.2989899,2.98528137 21.9852814,5.67157288 21.9852814,8.98528137 C21.9852814,12.2989899 19.2989899,14.9852814 15.9852814,14.9852814 Z M16.1776695,9.07106781 C17.0060967,9.07106781 17.6776695,8.39949494 17.6776695,7.57106781 C17.6776695,6.74264069 17.0060967,6.07106781 16.1776695,6.07106781 C15.3492424,6.07106781 14.6776695,6.74264069 14.6776695,7.57106781 C14.6776695,8.39949494 15.3492424,9.07106781 16.1776695,9.07106781 Z" fill="#000000" transform="translate(15.985281, 8.985281) rotate(-315.000000) translate(-15.985281, -8.985281) "></path>
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                        </a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<!--start::PopUp-->
+<div id="divResetPasswordPopUp" class="modal modal-sticky-bottom-right show" role="dialog" data-backdrop="false" style="z-index:9999999;display:none;  padding-right: 17px;top: 100px !important" aria-modal="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <!--begin::Header-->
+                <div class="card-header align-items-center px-4 py-3" style="position:relative">
+                    <div class="text-center flex-grow-1">
+                        <div class="text-dark-75 font-weight-bold font-size-h5" style="text-align: left;padding-left: 13px;">New Password</div>
+                    </div>
+                    <div class="text-right flex-grow-1">
+                        <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" onclick="CloseRSPPopup();">
+                            <i class="ki ki-close icon-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Footer-->
+                <div class="border-bottom: 1px solid #EBEDF3;">
+                    <textarea id="lblResetedPassword" name="lblResetedPassword" class="form-control border-0 p-0" rows="2" style="margin: 19px 6%;width: 88%;"></textarea>
+                </div>
+                <div class="card-footer align-items-center">
+                    <!--begin::Compose-->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Footer-->
+            </div>
+            <!--end::Card-->
+        </div>
+    </div>
+</div>
+<!--end::PopUp-->
+
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>

@@ -1,0 +1,161 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_CandidateReport
+@{
+    SessionClass session = new SessionClass();
+}
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Assets/ERP/css/Custom.css")" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style type="text/css">
+    .candidatereportmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .candidatereportmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+
+    .table1main tr td {
+        width: 23%;
+    }
+</style>
+<script src="@Url.Content("~/Assets/ERP/Scripts/Custom/CandidateReport.js")"></script>
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">R</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Candidate Report</div>
+                                <div class="wizard-desc">Candidate Report Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class=" card-custom card-shadowless rounded-top-0" style="margin-top:20px; ">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center ">
+                        <div class="col-xl-12 col-xxl-10">
+                            <div class="table1main">
+                                <div class="theader">
+                                    <span class="tspan">Candidate Report</span>
+                                </div>
+                                <div class="tbody ">
+                                    <div class="reportfilter">
+                                        @using (Html.BeginForm("Index", "CandidateReport", FormMethod.Post, new { @class = "form", @id = "frmJobPost" }))
+                                        {
+                                        <div>
+                                            @if (session.UserDetail.UserType != (int)CommonClass.enumUserType.FranchiseRecruiter && session.UserDetail.UserType != (int)CommonClass.enumUserType.FranchiseAdmin)
+                                            {
+                                                @Html.DropDownListFor(r => r.FranchiseId, new SelectList(Model.FranchiseList, "Value", "Text", Model.FranchiseId), new { @class = "form-control ddlFranchise", @nextctrl = "ddlClient", @wurl = "Common/ClientByFranchiseId" })
+                                            }
+                                            else
+                                            {
+                                                @Html.HiddenFor(r => r.FranchiseId, new { @class = "ddlFranchise"})
+                                            }
+                                            @Html.DropDownListFor(r => r.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", Model.CompanyId), new { @class = "form-control ddlClient", @nextctrl = "ddlJobLocation", @wurl = "Common/JobLocByClientAndUserType" })
+                                            @Html.DropDownListFor(r => r.JobLocation, new SelectList(Model.JobLocationList, "StringValue", "Text", Model.JobLocation), new { @class = "form-control ddlJobLocation", @nextctrl = "ddlJobTitle", @wurl = "Common/JobTitleByJobLocAndUserType" })
+                                            @Html.DropDownListFor(r => r.JobPostId, new SelectList(Model.JobTitleList, "Value", "Text", Model.JobPostId), new { @class = "form-control ddlJobTitle" })
+                                            @Html.Partial("_StatusSelect", Model.Status)
+                                            <div class="divDatePicker dt1">
+                                                <input type="text" readonly value="@(Model.FromDate)" id="FromDate" name="FromDate" class="form-control" placeholder="From Date" />
+                                                <div class="input-group-append" id="dtPick1">
+                                                    <i class="la la-calendar" id="dtepik1"></i>
+                                                </div>
+                                                <div class="input-group-append hide" style="display:none;" id="dtCrosK1">
+                                                    <i class="la la-close" id="dtcross1"></i>
+                                                </div>
+                                            </div>
+                                            <div class="divDatePicker">
+                                                <input type="text" readonly value="@(Model.ToDate)" id="ToDate" name="ToDate" class="form-control" placeholder="To Date" />
+                                                <div class="input-group-append" id="dtPick2">
+                                                    <i class="la la-calendar" id="dtepik2"></i>
+                                                </div>
+                                                <div class="input-group-append datepick2" style="display:none;" id="dtCrosK2">
+                                                    <i class="la la-close" id="dtcross2"></i>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary btn-md text-uppercase font-weight-bold">Filter</button>
+                                        </div>
+                                        }
+                                    </div>
+                                    <!--begin::Wizard Form-->
+                                    <table id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Franchise  <br />Recruiter </th>
+                                                <th>Name <br />Location<br /> Phone Number <br /> Email</th>
+                                                <th> Current Company <br /> Current Position <br />Current CTC</th>
+                                                <th>Total Experience <br />Notice Period</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Content.CandidateDetail.Count > 0)
+                                            {
+                                                foreach (JobPostCandidateDetail candidate in Model.Content.CandidateDetail)
+                                                {
+                                                    <tr>
+                                                        <td>@candidate.FranchiseName <br /> @candidate.RecruiterName</td>
+                                                        <td>
+                                                            <a target="_blank" href="@(Url.Content(ConfigSetting.ResumeFilePath + candidate.CandidateId + "/" + candidate.ResumeFileName))"> @candidate.FullName</a>
+                                                            <br /> @candidate.Location <br />
+                                                            @candidate.PhoneNumber<br />@candidate.Email
+                                                        </td>
+                                                        <td>@candidate.CurrentCompany <br />@candidate.CurrentPosition <br />@candidate.CurrentCTC</td>
+                                                        <td>@candidate.TotalExperience <br />@candidate.NoticePeriodText</td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="4" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--end::Wizard Form-->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script>
+    $(document).ready(function () {
+        $('#status').addClass("form-control");
+        $("#FromDate").datepicker({ dateFormat: 'dd MM yy' });
+        $("#ToDate").datepicker({ dateFormat: 'dd MM yy' });
+        $("#dtepik1").on('click', function () {
+            $("#FromDate").datepicker('show');
+        });
+        $("#dtepik2").on('click', function () {
+            $("#ToDate").datepicker('show');
+        });
+        $('#myTable').DataTable();
+    });
+</script>
+
+

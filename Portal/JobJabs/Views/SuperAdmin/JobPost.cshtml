@@ -1,0 +1,126 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_JobPostFullDetailList
+@{
+    ViewBag.Title = "Index";
+}
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .jobmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .jobmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">J</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Job Post</div>
+                                <div class="wizard-desc">All Active Job Post Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class=" card-custom card-shadowless rounded-top-0" style="margin-top:20px; ">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center ">
+                        <div class="col-xl-12 col-xxl-10">
+                            <div class="table1main">
+                                <div class="theader">
+                                    <span class="tspan floatl"> List Of Jobs</span>
+                                    <span class="floatr">
+                                        @using (Html.BeginForm("JobPost", "SuperAdmin", FormMethod.Post, new { @class = "form", @id = "frmJobPost" }))
+                                        {
+                                            @Html.Partial("_StatusSelect", Model.Status)
+                                        }
+                                    </span>
+                                    <span class="clear"></span>
+                                </div>
+                                <div class="tbody">
+                                    <!--begin::Wizard Form-->
+                                    <table id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:25%">Client Name<br /> Location</th>
+                                                <th tyle="width:30%">Job Title<br />Location</th>
+                                                <th style="width:25%">Franchise</th>
+                                                <th style="width:20%;text-align:center;">Candidate Count</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.JobPostList.Count > 0)
+                                            {
+                                                foreach (JobPostWithFullDetail jobPost in Model.JobPostList)
+                                                {
+                                                    <tr>
+                                                        <td style="border-bottom: 1px solid #111;">@jobPost.ClientName <br />@jobPost.ClientLocation</td>
+                                                        <td style="border-bottom: 1px solid #111;">@jobPost.JobTitle <br /> @jobPost.JobLocation</td>
+                                                        <td style="border-bottom: 1px solid #111;" colspan="5">
+                                                            <table style="width:100%">
+                                                                @foreach (JPWiseCandidateDetail candidate in jobPost.CandidateList)
+                                                                {
+                                                                    <tr>
+                                                                        <td style="width:65%; padding:0px;">@candidate.FranchiseName</td>
+                                                                        <td class="text-center td-display-none">
+                                                                            <a title="@Model.StatusText" href="@(Url.Content("~/SuperAdmin/CandidateList?" + jobPost.JPLink  + "&fid=" + candidate.FranchiseId + "&sts=" + (Model.Status)))">@(candidate.CandidateCount)</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </table>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="7" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--end::Wizard Form-->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+    $('#status').on('change', function () {
+        $('#frmJobPost').submit();
+    });
+</script>
+
+
+
+

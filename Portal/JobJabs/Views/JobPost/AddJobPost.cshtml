@@ -1,0 +1,280 @@
+﻿@using JobJabs.Entity
+@model JobJabs.ViewModel.VM_AddJobPost
+@{
+    ViewBag.Title = "Add Job Post";
+}
+<script src="@Url.Content("~/Assets/ERP/Scripts/Custom/BusinessDetail.js")"></script>
+<style type="text/css">
+    .jobmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .jobmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/JobPost"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">J</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Job Post</div>
+                                <div class="wizard-desc">All Active Job Post Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">A</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Job Post Detail</div>
+                                <div class="wizard-desc">Add Job Post Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-10 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("AddJobPost", "JobPost", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+                            {
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-10">Job Detail:</h5>
+                                            <!--begin::Message-->
+                                            @if (!string.IsNullOrEmpty(Model.Message))
+                                            {
+                                                <div class="form-group row" style="text-align: center;margin-top: -20px;">
+                                                    <label class="col-xl-12 col-lg-12 col-form-label" style="color:red;">@(Model.Message)</label>
+                                                </div>
+                                            }
+                                                <div>
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Client Name</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.DropDownListFor(r => r.JobPost.ClientId, new SelectList(Model.CompanyList.CompanyDetailDropDown, "Value", "Text", Model.JobPost.ClientId), new { @class = "form-control dropdownfill", @nextctrl = "ClientLocation", @wurl = "Common/GetCompanyLocation" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.ClientId)
+                                                            @Html.HiddenFor(r=>r.JobPost.JobPostId)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Client Location</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.DropDownListFor(r => r.JobPost.ClientLocationId, new SelectList(Model.CompLocList.CompLocDetailDropDown, "Value", "Text", Model.JobPost.ClientLocationId), new { @class = "form-control ClientLocation" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.ClientLocationId)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Job Title</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextBoxFor(r => r.JobPost.JobTitle, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.JobTitle)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Job Location</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextBoxFor(r => r.JobPost.JobLocation, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.JobLocation)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">CTC</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextBoxFor(r => r.JobPost.JobCTC, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.JobCTC)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Company Description</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextAreaFor(r => r.JobPost.CompanyDescription, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.CompanyDescription)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Job Description</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextAreaFor(r => r.JobPost.JobDescription, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.JobDescription)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Qualification</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextAreaFor(r => r.JobPost.Qualification, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.Qualification)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Additional Information</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextAreaFor(r => r.JobPost.AdditionalInformation, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.AdditionalInformation)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Industry</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextBoxFor(r => r.JobPost.Industry, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.Industry)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Function</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.TextBoxFor(r => r.JobPost.Functional, new { @class = "form-control form-control-solid form-control-lg" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.Functional)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Experience Level</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.DropDownListFor(r => r.JobPost.ExperienceLevel, new SelectList(Model.ExperienceLevel.ExperienceLevelDropDown, "Value", "Text", Model.JobPost.ExperienceLevel), new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.ExperienceLevel)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Type Of Employment</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            @Html.DropDownListFor(r => r.JobPost.TypeOfEmployment, new SelectList(Model.EmploymentType.EmploymentTypeDropDown, "Value", "Text", Model.JobPost.TypeOfEmployment), new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(r => r.JobPost.TypeOfEmployment)
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Job Description</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="custom-file">
+                                                                <input class="custom-file-input" id="JDFile" name="JDFile" type="file">
+                                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                @Html.TextBoxFor(r => r.JobPost.JDFileName, new { @class = "jpfile", @style = "position:absolute; top:0px; left:5px;" })
+                                                                @Html.ValidationMessageFor(r => r.JobPost.JDFileName)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Checklist</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="custom-file">
+                                                                <input class="custom-file-input" id="ChecklistFile" name="ChecklistFile" type="file">
+                                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                @Html.TextBoxFor(r => r.JobPost.ChecklistFileName, new { @class = "jpfile", @style = "position:absolute; top:0px; left:5px;" })
+                                                                @Html.ValidationMessageFor(r => r.JobPost.ChecklistFileName)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                </div>
+                                        </div>
+                                        <!--begin::Wizard Actions-->
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                            <div>
+                                                <button type="submit" style="display:inline !important" onclick="return CheckFile();" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!--end::Wizard Actions-->
+                                    </div>
+                                </div>
+                            }
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#JDFile").change(function (e) {
+            FileUploadValidation(this);
+        });
+        $("#ChecklistFile").change(function (e) {
+            FileUploadValidation(this);
+        });
+    });
+
+    function FileUploadValidation(elem) {
+        var file = $(elem)[0].files[0];
+        if (file) {
+            $(elem).next().html(file.name);
+            $(elem).next().removeClass('input-validation-error');
+            $(elem).parent().find('.jpfile').val(file.name);
+            $(elem).parent().find('.jpfile').blur();
+        }
+    }
+
+    function CheckFile() {
+        var retun = true;
+        if (CheckIfFileExists($("#JDFile")) === false) {
+            retun=false
+        }
+        if (CheckIfFileExists($("#ChecklistFile")) === false) {
+            retun = false
+        }
+        return retun;
+    }
+
+    function CheckIfFileExists(jpFile) {
+        var retn = true;
+        var file = $(jpFile)[0].files[0];
+        if (file) {
+            $(jpFile).next().removeClass('input-validation-error');
+        }
+        else {
+            $(jpFile).next().addClass('input-validation-error');
+            retn = false;
+        }
+        return retn;
+    }
+
+</script>

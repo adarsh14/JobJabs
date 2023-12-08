@@ -1,0 +1,120 @@
+﻿@using JobJabs.Entity
+@model JobJabs.ViewModel.VM_AddBlogPost
+@{
+    ViewBag.Title = "Add Blog";
+}
+<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+<style type="text/css">
+    .blogmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .blogmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/SuperAdmin/BlogList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">B</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Blogs</div>
+                                <div class="wizard-desc">All Active Blogs Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">A</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Blog Detail</div>
+                                <div class="wizard-desc">Add New Blog</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-10 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("AddBlog", "SuperAdmin", FormMethod.Post))
+                            {
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-10">Blog Detail:</h5>
+                                            <!--begin::Message-->
+                                            @if(!string.IsNullOrEmpty(Model.Message))
+                                            {
+                                                <div class="form-group row" style="text-align: center;margin-top: -20px;">
+                                                    <label class="col-xl-12 col-lg-12 col-form-label" style="color:red;">@(Model.Message)</label>
+                                                </div>
+                                            }
+                                            <div>
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Blog Title</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.BlogPostTitle, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.BlogPostTitle)
+                                                        @Html.HiddenFor(r => r.BlogPostId)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Blog Content</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextAreaFor(r => r.BlogPostContent, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.BlogPostContent)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                            </div>
+                                        </div>
+                                        <!--begin::Wizard Actions-->
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                            <div style="width: 100%;text-align: right;">
+                                                <button type="submit" style="display:inline !important" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!--end::Wizard Actions-->
+                                    </div>
+                                </div>
+                            }
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#BlogPostContent'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>

@@ -1,0 +1,44 @@
+﻿@using JobJabs.Entity
+@{
+    Layout = null;
+    SessionClass session = new SessionClass();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+
+        h2 {
+            line-height: 50px;
+            margin: 0px;
+            padding: 0px;
+            font-size: 35px;
+        }
+         h5 {
+            margin: 0px;
+            padding: 0px;
+            font-size: 18px;
+        }
+
+        div {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>404</h2>
+        <h5> Sorry we can't seem to find the page you're looking for.</h5>
+        <h5>  There may be a misspelling in the URL entered,or the page you are looking for may no longer exist.</h5>
+        <br />
+        <span>
+            Click <a href="@(Url.Content("~/"))" class="menu-link">here</a> to go to Home.
+        </span>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_CurrentOpenings
+@{
+    ViewBag.Title = "Current Openings";
+}
+
+<style>
+    p {
+        margin: 0 0px 24px 10px;
+        line-height: 23px;
+        font-size: 15px;
+    }
+
+    .cropeningselected a {
+        border-bottom-color: #fecc17 !important;
+        color: #fecc17 !important;
+    }
+
+    .job_tags {
+        margin: 0 0px 10px 10px !important;
+    }
+</style>
+
+<div class="mj_pagetitle2">
+    <div class="mj_pagetitleimg">
+        <img src="@Url.Content("~/assets/Portal/themes/meshjobs/images/job_detail_benner.jpg")" alt="">
+        <div class="mj_mainheading_overlay"></div>
+    </div>
+    <div class="mj_pagetitle_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mj_mainheading">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="mj_joblogo">
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="mj_pageheading mj_toppadder50 ">
+                                    <h1>Current Openings</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mj_lightgraytbg mj_bottompadder80" style="margin-top:70px;">
+    <div class="container">
+        <div class="row">
+            @if (Model.JobPostList.JobPost.Count > 0)
+            {
+                foreach (JobPostDetail job in Model.JobPostList.JobPost)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Single Job List -->
+                            <div class="item-click">
+                                <article>
+                                    <div class="brows-job-list">
+
+                                        <div class="col-md-6 col-sm-5">
+                                            <div class="brows-job-position">
+                                                <a href="javascript:void('0');"><h3>@job.JobTitle</h3></a>
+                                                <p>
+                                                    <span class="brows-job-sallery">₹ @job.JobCTC</span>
+                                                </p>
+                                                <p>
+                                                    <span class="brows-job-sallery" style="color:#999">Posted: &nbsp;@Math.Round((DateTime.Now - job.JPUpdatedOn).TotalDays) days ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="brows-job-location">
+                                                <p><i class="fa fa-map-marker"></i>@job.JobLocation</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2" style="display:none;">
+                                            <div class="brows-job-link">
+                                                <a href="javascript:void('0')" id="anchorApplyNow" class="btn btn-default anchorApplyNow">Apply Job</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-12" style="width: 100%;text-align: center;margin-top:50px;color: orangered;">
+                        Coming Soon...
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

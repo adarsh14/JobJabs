@@ -1,0 +1,126 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_CandidateList
+
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .jobmenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .jobmenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/FranchiseAdmin/JobPost"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">J</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Job Post</div>
+                                <div class="wizard-desc">All Active Job Post Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">C</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Candidate</div>
+                                <div class="wizard-desc">All Candidate Assigned Information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class=" card-custom card-shadowless rounded-top-0" style="margin-top:20px; ">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center ">
+                        <div class="col-xl-12 col-xxl-10">
+                            <div class="table1main">
+                                <div class="theader">
+                                    <span class="tspan"> List Of Candidate For @Model.JobTitle</span>
+                                </div>
+                                <div class="tbody">
+                                    <!--begin::Wizard Form-->
+                                    <table id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Recruiter</th>
+                                                <th>Name <br />Location</th>
+                                                <th>Phone Number <br /> Email <br />Website</th>
+                                                <th>Current Company <br /> Current Position <br />Current CTC</th>
+                                                <th>Total Experience <br />Notice Period</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.CandidateList.CandidateDetail.Count > 0)
+                                            {
+                                                foreach (JobPostCandidateDetail candidate in Model.CandidateList.CandidateDetail)
+                                                {
+                                            <tr>
+                                                <td>@candidate.RecruiterName</td>
+                                                <td><a target="_blank" href="@(Url.Content(ConfigSetting.ResumeFilePath + candidate.CandidateId + "/" + candidate.ResumeFileName))"> @candidate.FullName</a>
+                                                <br /> @candidate.Location</td>
+                                                <td>@candidate.PhoneNumber<br />@candidate.Email<br />@candidate.Website</td>
+                                                <td>@candidate.CurrentCompany <br />@candidate.CurrentPosition <br />@candidate.CurrentCTC</td>
+                                                <td>@candidate.TotalExperience <br />@candidate.NoticePeriodText</td>
+                                                <td class="text-center" style="width:70px;">
+                                                    @if (candidate.JPCAStatus == 2 || candidate.JPCAStatus == 14)
+                                                    {
+                                                        <a class="commentpopup" href="@(Url.Content("~/Common/GetComments?sts=" + candidate.JPCAStatus + "&jpcaid=" + candidate.JPCAId))">
+                                                            <span class="label label-lg label-light-danger label-inline">@CommonClass.CandidateStatusText(candidate.JPCAStatus)</span>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-lg label-light-success label-inline">@CommonClass.CandidateStatusText(candidate.JPCAStatus)</span>
+
+                                                    }
+                                                </td>
+                                            </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="6" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--end::Wizard Form-->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+

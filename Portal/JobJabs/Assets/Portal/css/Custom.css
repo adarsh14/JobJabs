@@ -1,0 +1,19 @@
+﻿
+.punchimagebg {
+    position: fixed;
+    width: 100%;
+    height:600px;
+    background-color:black;
+    opacity:0.5;
+    z-index:1;
+    display:none;
+}
+
+.punchimage {
+    display: none;
+    z-index: 99999;
+    position: absolute;
+    top: 10px;
+    left: 377px;
+    width: 660px;
+}

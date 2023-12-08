@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Gallery";
+}
+<style>
+    .galleryselected a {
+        border-bottom-color: #fecc17 !important;
+        color: #fecc17 !important;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="vc_row wpb_row vc_row-fluid">
+            <div class="wpb_column vc_column_container vc_col-sm-12">
+                <div class="vc_column-inner ">
+                    <div class="wpb_wrapper">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+                                <div class="mj_mainheading mj_toppadder80 mj_bottompadder50">
+                                    <h1>Gallery</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div id="mj_grid">
+                                @for (int i = 1; i <= 20; i++)
+                                {
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 mix mix-all holidays" data-value="1">
+                                        <div class="row">
+                                            <div class="mj_gallary_img">
+                                                <img src="@Url.Content("~/Assets/Portal/Images/Gallery/" + i +".jpg")" class="img-responsive">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                           
+                        </div>
+                        <div class="mj_bottompadder40">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="entry-footer"></footer><!-- .entry-footer -->
+    </div>
+</div>
+

@@ -1,0 +1,151 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_AssignFranchise
+@{
+    ViewBag.Title = "Assign Franchise To SPOCAdmin";
+}
+
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="" onclick="window.location.href = '@(Url.Content("~/User?UserType=" +(int)CommonClass.enumUserType.SuperAdmin))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">1</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Super Admin</div>
+                                <div class="wizard-desc">All Active Super Admin Information</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="" onclick="window.location.href = '@(Url.Content("~/User?UserType=" +(int)CommonClass.enumUserType.SPOCAdmin))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">2</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">SPOC</div>
+                                <div class="wizard-desc">All Active SPOC Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="" onclick="window.location.href = '@(Url.Content("~/User/FranchiseList"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">3</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Franchise Admin</div>
+                                <div class="wizard-desc">All Active Franchise Admin Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">C</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Assign Franchise</div>
+                                <div class="wizard-desc">Assign Franchise To SPOC</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-7 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("AssignFranchise", "User", FormMethod.Post, new { @class = "form" }))
+                            {
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-11">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-5">
+                                                <label class="col-xl-12 col-xxl-12 col-lg-12 col-md-12 col-sm-12">
+                                                    Assign Franchise To @(Model.SPOCAdminName) :
+                                                </label>
+                                               
+                                                <!--begin::Message-->
+                                                @if (!string.IsNullOrEmpty(Model.Message))
+                                                {
+                                                    <label class="col-form-label col-xl-5 col-xxl-5 col-lg-5 col-md-12 col-sm-12" style="color:red;font-size: 12px !important;font-weight: 400 !important;text-align: center;">
+                                                        @(Model.Message)
+                                                    </label>
+                                                }
+                                                <!--end::Message-->
+
+                                            </h5>
+                                            <div class="border-top" style="padding-top:30px;">
+
+                                                @if (Model.FranchiseList.Franchise.Count > 0)
+                                                {
+                                                    <!--begin::Group-->
+                                                <div class="form-group row" style="margin-bottom:0px !important">
+
+                                                    @{ int j = 0; }
+                                                    @foreach (CheckModel CheckBox in Model.FranchiseList.SPOCFranchiseCheckBox)
+                                                    {
+                                                        <div class="col-lg-4 col-xl-4 col-sm-12" style="margin-bottom:25px;">
+                                                            <div class="checkbox-inline">
+                                                                <label class="checkbox checkbox-lg" style="margin-right:30px;">
+                                                                    @if (CheckBox.Checked)
+                                                                    {
+                                                                        <input data-val="true" data-val-required="The Checked field is required." name="@Html.Raw("CheckBox[" + j + "].Checked")" checked="checked" type="checkbox" value="true" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input data-val="true" data-val-required="The Checked field is required." name="@Html.Raw("CheckBox[" + j + "].Checked")" type="checkbox" value="true" />
+                                                                    }
+                                                                    <span></span>@(CheckBox.Name)
+                                                                    <input name="@Html.Raw("CheckBox[" + j + "].Checked")" type="hidden" value="false">
+                                                                    <input name="@Html.Raw("CheckBox[" + j + "].ParentId")" type="hidden" value="@(Model.SPOCAdminId)">
+                                                                    <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." name="@Html.Raw("CheckBox[" + j + "].Id")" value="@(CheckBox.Id)" type="hidden" />
+                                                                    <input name="@Html.Raw("CheckBox[" + j + "].Name")" value="@(CheckBox.Name)" type="hidden" />
+                                                                </label>
+                                                                @{ j = j + 1; }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                    <!--end::Group-->
+                                                    <input name="SpocAdminName" type="hidden" value="@Model.SPOCAdminName">
+                                                }
+                                            </div>
+
+                                        </div>
+                                        <!--end::Wizard Step 1-->
+                                        @if (Model.FranchiseList.Franchise.Count > 0)
+                                        {
+                                            <!--begin::Wizard Actions-->
+                                            <div class="d-flex justify-content-between border-top pt-10 pb-5">
+                                                <div>
+                                                    <button type="submit" style="display:inline !important" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                                </div>
+                                            </div>
+                                            <!--end::Wizard Actions-->
+                                        }
+                                    </div>
+                                </div>
+
+                            }
+
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->

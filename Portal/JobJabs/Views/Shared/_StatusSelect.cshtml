@@ -1,0 +1,23 @@
+﻿@using JobJabs.Entity
+@model int
+@{
+    Layout = null;
+}
+<select id="status" name="status">
+    <option value="-1" @(Model == -1 ? "selected" : "")>Select Candidate Status</option>
+    <option value="0" @(Model == 0 ? "selected" : "")>New Candidate</option>
+    <option value="14" @(Model == 14 ? "selected" : "")>NRC</option>
+    <option value="1" @(Model == 1 ? "selected" : "")>Validated</option>
+    <option value="2" @(Model == 2 ? "selected" : "")>Validation rejected</option>
+    <option value="4" @(Model == 4 ? "selected" : "")>Interview scheduled</option>
+    <option value="3" @(Model == 3 ? "selected" : "")>Turn Ups</option>
+    <option value="5" @(Model == 5 ? "selected" : "")>2nd round scheduled</option>
+    <option value="6" @(Model == 6 ? "selected" : "")>Final round scheduled</option>
+    <option value="7" @(Model == 7 ? "selected" : "")>Interview Rejected</option>
+    <option value="8" @(Model == 8 ? "selected" : "")>Shortlisted</option>
+    <option value="9" @(Model == 9 ? "selected" : "")>Selected</option>
+    <option value="10" @(Model == 10 ? "selected" : "")>Documentation Pending</option>
+    <option value="11" @(Model == 11 ? "selected" : "")>Joined</option>
+    <option value="12" @(Model == 12 ? "selected" : "")>Not Joined</option>
+    <option value="13" @(Model == 13 ? "selected" : "")>Back Out</option>
+</select>

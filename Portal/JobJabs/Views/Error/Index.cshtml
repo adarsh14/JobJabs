@@ -1,0 +1,48 @@
+﻿@using JobJabs.Entity
+@{
+    Layout = null;
+    SessionClass session = new SessionClass();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        body {
+            text-align: center;
+          
+        }
+
+        h2, h5 {
+            line-height: 50px;
+            margin: 0px;
+            padding: 0px;
+            font-size: 35px;
+        }
+
+        div {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>OOPS!</h2>
+        <h5>Something went wrong here</h5>
+        <br />
+        @if (session.UserDetail.UserId > 0)
+        {
+            <span>
+                Click <a href="@(Url.Content("~/ " + CommonClass.DashboardLink(session.UserDetail.UserType)))" class="menu-link">here</a> to go to dashboard.
+            </span>
+        }
+        else
+        {
+            <span>
+                Click <a href="@(Url.Content("~/"))" class="menu-link">here</a> to go to Home.
+            </span>
+        }
+    </div>
+</body>
+</html>
+

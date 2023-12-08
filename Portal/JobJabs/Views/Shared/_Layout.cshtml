@@ -1,0 +1,323 @@
+﻿@using JobJabs.Entity
+@{
+    Layout = null;
+    SessionClass session = new SessionClass();
+}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="xmlrpc.php">
+    <script type="text/javascript">document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
+    <title>JobJabs</title>
+    <style>
+        .wishlist_table .add_to_cart, a.add_to_wishlist.button.alt {
+            border-radius: 16px;
+            -moz-border-radius: 16px;
+            -webkit-border-radius: 16px;
+        }
+    </style>
+    <link rel='dns-prefetch' href='http://cdnjs.cloudflare.com/' />
+
+    <link rel='dns-prefetch' href='http://s.w.org/' />
+    <link rel="alternate" type="application/rss+xml" title="wordpress-127012-368632.cloudwaysapps.com &raquo; Feed" href="feed/index.html" />
+    <link rel="alternate" type="application/rss+xml" title="wordpress-127012-368632.cloudwaysapps.com &raquo; Comments Feed" href="comments/feed/index.html" />
+
+    <style type="text/css">
+        img.wp-smiley,
+        img.emoji {
+            display: inline !important;
+            border: none !important;
+            box-shadow: none !important;
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+            vertical-align: -0.1em !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+    </style>
+    <link rel='stylesheet' id='codeclouds-mp-css-css' href='../cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='fs-frontend-css-css' href='@Url.Content("~/Assets/Portal/plugins/flickr-stream/css/frontend.min4e44.css?ver=1.3")' type='text/css' media='all' />
+    <link rel='stylesheet' id='rs-plugin-settings-css' href='@Url.Content("~/Assets/Portal/plugins/revslider/public/assets/css/settings78d9.css?ver=5.4.3.1")' type='text/css' media='all' />
+    <style id='rs-plugin-settings-inline-css' type='text/css'>
+        #rs-demo-id {
+        }
+    </style>
+    <link rel='stylesheet' id='woocommerce-layout-css' href='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/css/woocommerce-layoute5ca.css?ver=3.2.3")' type='text/css' media='all' />
+    <link rel='stylesheet' id='woocommerce-smallscreen-css' href='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/css/woocommerce-smallscreene5ca.css?ver=3.2.3")' type='text/css' media='only screen and (max-width: 768px)' />
+    <link rel='stylesheet' id='woocommerce-general-css' href='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/css/woocommercee5ca.css?ver=3.2.3")' type='text/css' media='all' />
+    <link rel='stylesheet' id='job-alerts-frontend-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager-alerts/assets/css/frontende506.css?ver=4.8.12")' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-job-manager-applications-frontend-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager-applications/assets/css/frontende506.css?ver=4.8.12")' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-job-manager-resume-frontend-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager-resumes/assets/css/frontende506.css?ver=4.8.12")' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-job-manager-tags-frontend-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager-tags/assets/css/stylee506.css?ver=4.8.12")' type='text/css' media='all' />
+    <link rel='stylesheet' id='chosen-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager/assets/css/chosenf488.css?ver=1.1.0")' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-job-manager-frontend-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager/assets/css/frontendc180.css?ver=1.29.0.1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='wc-paid-listings-packages-css' href='@Url.Content("~/Assets/Portal/plugins/wp-job-manager-wc-paid-listings/assets/css/packagese506.css?ver=4.8.12")' type='text/css' media='all' />
+    <link rel='stylesheet' id='woocommerce_prettyPhoto_css-css' href='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/css/prettyPhotoe5ca.css?ver=3.2.3")' type='text/css' media='all' />
+    <link rel='stylesheet' id='jquery-selectBox-css' href='@Url.Content("~/Assets/Portal/plugins/yith-woocommerce-wishlist/assets/css/jquery.selectBox7359.css?ver=1.2.0")' type='text/css' media='all' />
+    <link rel='stylesheet' id='yith-wcwl-main-css' href='@Url.Content("~/Assets/Portal/plugins/yith-woocommerce-wishlist/assets/css/style431f.css?ver=2.1.2")' type='text/css' media='all' />
+    <link rel='stylesheet' id='yith-wcwl-font-awesome-css' href='@Url.Content("~/Assets/Portal/plugins/yith-woocommerce-wishlist/assets/css/font-awesome.min1849.css?ver=4.7.0")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_defaultbasic-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/style68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_bootstrap-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/css/bootstrap68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_font-awesome-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/css/font-awesome68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_fonts-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/css/fonts68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_animate-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/css/animate68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_fancybox-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/fancybox/jquery.fancybox68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_layers-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/layers68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_navigation-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/navigation68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_ui-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/jquery-ui/jquery-ui68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_bootstrap_slider-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/bootstrap-slider/bootstrap-slider68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='meshjobs_carousel-css' href='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/owl/owl.carousel68b3.css?ver=1")' type='text/css' media='all' />
+    <link rel='stylesheet' id='js_composer_front-css' href='@Url.Content("~/Assets/Portal/plugins/js_composer/assets/css/js_composer.min7661.css?ver=5.4.2")' type='text/css' media='all' />
+    @*New CSS Start*@
+    <link rel='stylesheet' id='meshjobs_style-css' href='@Url.Content("~/assets/Portal/styles/custom/main.css")' type='text/css' media='all' />
+    <link rel='stylesheet' href='@Url.Content("~/Assets/Portal/CSS/Custom.css")' type='text/css' media='all' />
+    @*New CSS Ends*@
+
+    <script type='text/javascript' src='@Url.Content("~/assets/Portal/js/jquery/jqueryb8ff.js?ver=1.12.4")'></script>
+    <script type='text/javascript' src='@Url.Content("~/assets/Portal/js/jquery/jquery-migrate.min330a.js?ver=1.4.1")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/revslider/public/assets/js/jquery.themepunch.tools.min78d9.js?ver=5.4.3.1")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min78d9.js?ver=5.4.3.1")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/frontend/add-to-cart.mine5ca.js?ver=3.2.3")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart7661.js?ver=5.4.2")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/markerclusterere506.js?ver=4.8.12")'></script>
+    <link rel='https://api.w.org/' href='wp-json/index.html' />
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc0db0.php?rsd" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml" />
+    <meta name="generator" content="WordPress 4.8.12" />
+    <meta name="generator" content="WooCommerce 3.2.3" />
+    <link rel="canonical" href="index.html" />
+    <link rel='shortlink' href='index.html' />
+    <link rel="alternate" type="application/json+oembed" href="wp-json/oembed/1.0/embed865f.json?url=http%3A%2F%2Fwordpress-127012-368632.cloudwaysapps.com%2F" />
+    <link rel="alternate" type="text/xml+oembed" href="wp-json/oembed/1.0/embedc39a?url=http%3A%2F%2Fwordpress-127012-368632.cloudwaysapps.com%2F&amp;format=xml" />
+    <noscript>
+        <style>
+            .woocommerce-product-gallery {
+                opacity: 1 !important;
+            }
+        </style>
+    </noscript>
+    <meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress." />
+    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="http://wordpress-127012-368632.cloudwaysapps.com/assets/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]-->
+    <style id='job_manager_colors'>
+        .job-type.term-18, .job-type.freelance {
+            background-color:;
+        }
+
+        .job-type.term-15, .job-type.full-time {
+            background-color:;
+        }
+
+        .job-type.term-19, .job-type.internship {
+            background-color:;
+        }
+
+        .job-type.term-16, .job-type.part-time {
+            background-color:;
+        }
+
+        .job-type.term-17, .job-type.temporary {
+            background-color:;
+        }
+    </style>
+    <meta name="generator" content="Powered by Slider Revolution 5.4.3.1 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+    <script type="text/javascript">
+        function setREVStartSize(e) {
+            try {
+                var i = jQuery(window).width(), t = 9999, r = 0, n = 0, l = 0, f = 0, s = 0, h = 0;
+                if (e.responsiveLevels && (jQuery.each(e.responsiveLevels, function (e, f) { f > i && (t = r = f, l = e), i > f && f > r && (r = f, n = e) }), t > r && (l = n)), f = e.gridheight[l] || e.gridheight[0] || e.gridheight, s = e.gridwidth[l] || e.gridwidth[0] || e.gridwidth, h = i / s, h = h > 1 ? 1 : h, f = Math.round(h * f), "fullscreen" == e.sliderLayout) { var u = (e.c.width(), jQuery(window).height()); if (void 0 != e.fullScreenOffsetContainer) { var c = e.fullScreenOffsetContainer.split(","); if (c) jQuery.each(c, function (e, i) { u = jQuery(i).length > 0 ? u - jQuery(i).outerHeight(!0) : u }), e.fullScreenOffset.split("%").length > 1 && void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 ? u -= jQuery(window).height() * parseInt(e.fullScreenOffset, 0) / 100 : void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 && (u -= parseInt(e.fullScreenOffset, 0)) } f = u } else void 0 != e.minHeight && f < e.minHeight && (f = e.minHeight); e.c.closest(".rev_slider_wrapper").css({ height: f })
+            } catch (d) { console.log("Failure at Presize of Slider:" + d) }
+        };</script>
+    <noscript>
+        <style type="text/css">
+            .wpb_animate_when_almost_visible {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+</head>
+
+<body class="home page-template-default page page-id-23 meshjobs wpb-js-composer js-comp-ver-5.4.2 vc_responsive">
+    <!--Loader Start -->
+    <div class="mj_preloaded">
+        <div class="mj_preloader">
+            <div class="lines">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+            </div>
+            <div class="loading-text">LOADING</div>
+        </div>
+    </div>
+    <!--Loader End --><div class="mj_header">
+        <div class="container" style="width:100%">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <div class="mj_logo">
+                        <a href="@Url.Content("~/Home")"><img src='@Url.Content("~/Assets/Portal/Images/logo.png")' class="img-responsive" alt="logo"></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mj_menu" aria-expanded="false">
+                            <span class="sr-only">MENU</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="collapse navbar-collapse mj_navmenu" id="mj_menu">
+                        <ul class="nav navbar-nav">
+                            <li id="menu-item-2459" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-2459 homeselected">
+                                <a href="@Url.Content("~/Home")">Home</a>
+                            </li>
+                            <li id="menu-item-2615" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2615 aboutselected">
+                                <a href="@Url.Content("~/Home/About")">About Us</a>
+                            </li>
+                            <li id="menu-item-2483" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2483 ceodeskselected">
+                                <a href="@Url.Content("~/CEODesk")">CEO Desk</a>
+                            </li>
+                            <li id="menu-item-2465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2465 teamselected">
+                                <a href="@Url.Content("~/Home/Team")">Team</a>
+                            </li>
+                            <li id="menu-item-2465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2465 franchiseselected">
+                                <a href="@Url.Content("~/Franchise ")">Franchise </a>
+                            </li>
+                            <li id="menu-item-2463" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2463 contactselected">
+                                <a href="@Url.Content("~/Home/Contact ")">Contact </a>
+                            </li>
+                            <li id="menu-item-2460" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2460 galleryselected">
+                                <a href="@Url.Content("~/Home/Gallery ")">Gallery </a>
+                            </li>
+                            <li id="menu-item-2460" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2460">
+                                @*<a href="javascript:void('0');" onclick="ShowPunchImage();"> Employee Login </a>*@
+                                <a href="@Url.Content("~/Login ")">Associate Login </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="mj_lightgraytbg ">
+        @RenderBody()
+    </div>
+    <div class="mj_footer mj_toppadder80 mj_bottompadder80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+                    <div class="mj_weight mj_bottompadder20">
+                        <a href="@Url.Content("~/")"><img src="@Url.Content("~/Assets/Portal/Images/logo.png")" class="img-responsive" alt="" style="width:20%" /></a>
+                        <p>Jobjabs is the brand of SPAR Business Services Pvt Ltd and is the pioneer of organized recruitment services in India. Over the years, we have acted as preferred talent acquisition partner to multinationals and leading Indian businesses to emerge as the leading recruitment brand nationally. This combined with our role as trusted consultants for Indian professionals translates into our core capability - <b>Building Careers Building Organizations</b> .</p>
+                    </div>
+                    <div class="mj_weight mj_bottompadder20">
+                        <div class="mj_sociallink">
+                            <ul>
+                                <li><a href="https://www.facebook.com/jobjabsindia/" data-toggle="tooltip" data-placement="bottom" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/jobsjabs" data-toggle="tooltip" data-placement="bottom" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                @*<li><a href="https://plus.google.com/discover" data-toggle="tooltip" data-placement="bottom" title="google" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+
+
+                                    <li><a href="https://login.skype.com/login?message=signin_continue" data-toggle="tooltip" data-placement="bottom" title="skype" target="_blank"><i class="fa fa-skype"></i></a></li>
+
+
+                                    <li><a href="https://dribbble.com/session/new" data-toggle="tooltip" data-placement="bottom" title="dribbble" target="_blank"><i class="fa fa-dribbble"></i></a></li>*@
+
+
+                            </ul>
+
+
+                        </div>
+
+                    </div>			<div class="mj_copyright">
+                        <p style="text-align: center;">
+                            © 2020 <a href="http://JobJabs.com">Job<span class="mj_yellow_text">Jabs</span></a><br />
+                        </p>
+                        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="totop">
+                    <div class="gototop">
+                        <a href="#">
+                            <i class="fa fa-angle-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="punchimagebg"></div>
+    <img src="@Url.Content("~/Assets/Portal/Images/jobjabs.gif?v=" + DateTime.Now.ToLongTimeString())" class="punchimage" />
+
+
+    <script type="text/javascript">
+        function revslider_showDoubleJqueryError(sliderID) {
+            var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+            errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+            errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
+            errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+            errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" + errorMessage + "</span>";
+            jQuery(sliderID).show().html(errorMessage);
+        }
+
+      
+        function ShowPunchImage() {
+            jQuery('.punchimagebg').show();
+            jQuery('.punchimage').show();
+            setTimeout(
+                    function () {
+                        window.location ='@(Url.Content("~/Login"))';
+                    }, 1500);
+            }
+       
+    </script>
+    <script type='text/javascript' src='../cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var fsJSData = { "useMobileView": "no", "photoswipeCustomJSPath": "http:\/\/wordpress-127012-368632.cloudwaysapps.com\/wp-content\/plugins\/flickr-stream\/photoswipe\/photoswipe-custom.js", "photoswipeCSSPath": "http:\/\/wordpress-127012-368632.cloudwaysapps.com\/wp-content\/plugins\/flickr-stream\/photoswipe\/photoswipe.css", "closeButtonText": "Close (Esc)" };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/flickr-stream/js/frontend.min4e44.js?ver=1.3")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/meshjobscore/js/mailchamp.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min44fd.js?ver=2.70")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/js-cookie/js.cookie.min6b25.js?ver=2.1.4")'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var woocommerce_params = { "ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "http:\/\/wordpress-127012-368632.cloudwaysapps.com\/?wc-ajax=%%endpoint%%" };
+                    /* ]]> */
+    </script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/frontend/woocommerce.mine5ca.js?ver=3.2.3")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/frontend/cart-fragments.mine5ca.js?ver=3.2.3")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/woocommerce/assets/js/prettyPhoto/jquery.prettyPhoto.min005e.js?ver=3.1.6")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/yith-woocommerce-wishlist/assets/js/jquery.selectBox.min7359.js?ver=1.2.0")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/yith-woocommerce-wishlist/assets/js/jquery.yith-wcwl431f.js?ver=2.1.2")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/bootstrap.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/modernizr.custom.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/jquery.themepunch.tools.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/jquery.themepunch.revolution.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/revolution.extension.layeranimation.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/revolution.extension.navigation.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/revolution.extension.parallax.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/rsslider/revolution.extension.slideanims.min.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/countto/jquery.countTo.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/owl/owl.carousel.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/bootstrap-slider/bootstrap-slider.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/fancybox/jquery.fancybox.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/fancybox/jquery.fancybox.pack.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/jquery.mixitup.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/jquery-ui/jquery-ui.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/plugins/isotop/isotope.pkgd.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/assets/Portal/themes/meshjobs/js/validation.js")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/themes/meshjobs/js/custom.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/assets/Portal/js/wp-embed.mine506.js?ver=4.8.12")'></script>
+    <script type='text/javascript' src='@Url.Content("~/Assets/Portal/plugins/js_composer/assets/js/dist/js_composer_front.min7661.js?ver=5.4.2")'></script>
+</body>
+
+<!-- Mirrored from wordpress-127012-368632.cloudwaysapps.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 08:04:25 GMT -->
+</html>

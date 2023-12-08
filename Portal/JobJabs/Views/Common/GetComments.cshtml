@@ -1,0 +1,71 @@
+﻿@using JobJabs.Entity;
+@using JobJabs.ViewModel;
+@model VM_JPCACommentDetail
+@{
+    Layout = null;
+    ViewBag.Title = "Comments";
+}
+<link href="@Url.Content("~/Assets/ERP/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .table1main .tbody table tr td {
+        border-bottom: 1px solid #111;
+        padding: 20px 10px;
+    }
+</style>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header align-items-center px-4 py-3" style="position:relative;min-height:50px;">
+                <div class="text-center flex-grow-1">
+                    <div class="text-dark-75 font-weight-bold font-size-h5" id="divPopUpHText" style="text-align: left;padding-left: 13px;">
+                        Comments
+                    </div>
+                </div>
+                <div class="text-right flex-grow-1">
+                    <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" onclick="CloseVCSPopup();">
+                        <i class="ki ki-close icon-1x"></i>
+                    </button>
+                </div>
+            </div>
+            <!--end::Header-->
+            <div class="border-bottom: 1px solid #EBEDF3;" style="padding:15px 30px 30px 30px">
+                <table id="myTable2" style="width:100%">
+                    <tbody>
+                        @if (Model.Comments.Count > 0)
+                        {
+                            foreach (JPCACommentDetail comment in Model.Comments)
+                            {
+                                <tr>
+                                    <td>@comment.JPCAComment</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="1" style="padding: 50px 0% 50px 40%;color: red;">No record available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <!--begin::Footer-->
+            <div class="card-footer align-items-center" style="padding:5px;">
+            </div>
+            <!--end::Footer-->
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+<script src="@Url.Content("~/Assets/ERP/Scripts/Vendor/jquery.dataTables.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable2').DataTable();
+    });
+</script>
+
+
+

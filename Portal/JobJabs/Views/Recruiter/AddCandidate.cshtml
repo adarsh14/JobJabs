@@ -1,0 +1,255 @@
+﻿@using JobJabs.Entity;
+@model JobJabs.ViewModel.VM_AddCandidate
+@{
+    ViewBag.Title = "Add Candidate";
+}
+<style type="text/css">
+    .candidatemenu > .menu-link .menu-icon.svg-icon svg g [fill] {
+        fill: #3699FF !important;
+    }
+
+    .candidatemenu > .menu-link .menu-text {
+        color: white !important;
+    }
+</style>
+<!--begin::Card-->
+<div class="card card-custom card-transparent">
+    <div class="card-body p-0">
+        <!--begin::Wizard-->
+        <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
+            <!--begin::Wizard Nav-->
+            <div class="wizard-nav">
+                <div class="wizard-steps">
+                    <div class="wizard-step" data-wizard-type="step" onclick="window.location.href = '@(Url.Content("~/Recruiter/JobPost"))';">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">J</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">All Job Post</div>
+                                <div class="wizard-desc">All Active Job Post Information</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-step" data-wizard-type="step"  data-wizard-state="current">
+                        <div class="wizard-wrapper">
+                            <div class="wizard-number">C</div>
+                            <div class="wizard-label">
+                                <div class="wizard-title">Add Candidate</div>
+                                <div class="wizard-desc">Add New Candidate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Wizard Nav-->
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless rounded-top-0">
+                <!--begin::Body-->
+                <div class="card-body p-0">
+                    <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+                            <!--begin::Wizard Form-->
+                            @using (Html.BeginForm("AddCandidate", "Recruiter", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+                            {
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <!--begin::Wizard Step 1-->
+                                        <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+                                            <h5 class="text-dark font-weight-bold mb-10">@(Model.JobPostId >0 ? "Assign Candidate Profile : " + Model.Title : "Candidate Profile :" ) </h5>
+                                            <!--begin::Message-->
+                                            @if (!string.IsNullOrEmpty(Model.Message))
+                                            {
+                                                <div class="form-group row" style="text-align: center;margin-top: -20px;">
+                                                    <label class="col-xl-12 col-lg-12 col-form-label" style="color:red;">@(Model.Message)</label>
+                                                </div>
+                                            }
+                                            <div>
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.FirstName, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.FirstName)
+                                                        @Html.HiddenFor(r => r.CandidateDetail.CandidateId)
+                                                        @Html.HiddenFor(r => r.JobPostId)
+                                                        @Html.HiddenFor(r => r.Title)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.LastName, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.LastName)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Location</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.Location, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.Location)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Mobile Number</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.PhoneNumber, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.PhoneNumber)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Email</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.Email, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.Email)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Website or Socail Network Link</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.Website, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.Website)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Current Designation</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.CurrentPosition, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.CurrentPosition)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Current Company</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.TextBoxFor(r => r.CandidateDetail.CurrentCompany, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.CurrentCompany)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Total Experience </label>
+                                                    <div class="col-lg-3 col-xl-4">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.TotalExperienceYear, new SelectList(Model.TotalExperienceYear.SelectItemList, "Value", "Text", Model.CandidateDetail.TotalExperienceYear), "-- Select Year --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.TotalExperienceYear)
+                                                    </div>
+                                                    <div class="col-lg-3 col-xl-4">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.TotalExperienceMonth, new SelectList(Model.TotalExperienceMonth.SelectItemList, "Value", "Text", Model.CandidateDetail.TotalExperienceMonth), "-- Select Month --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.TotalExperienceMonth)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Current CTC</label>
+                                                    <div class="col-lg-3 col-xl-3">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.CurrentCTCCrore, new SelectList(Model.CTCCrore.SelectItemList, "Value", "Text", Model.CandidateDetail.CurrentCTCCrore), "-- Select --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.CurrentCTCCrore)
+                                                    </div>
+                                                    <div class="col-lg-3 col-xl-3">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.CurrentCTCLakh, new SelectList(Model.CTCLakh.SelectItemList, "Value", "Text", Model.CandidateDetail.CurrentCTCLakh), "-- Select --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.CurrentCTCLakh)
+                                                    </div>
+                                                    <div class="col-lg-3 col-xl-3">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.CurrentCTCThousand, new SelectList(Model.CTCThousand.SelectItemList, "Value", "Text", Model.CandidateDetail.CurrentCTCThousand), "-- Select --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.CurrentCTCThousand)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Notice Period</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @Html.DropDownListFor(r => r.CandidateDetail.NoticePeriod, new SelectList(Model.NoticePeriod.SelectItemList, "Value", "Text", Model.CandidateDetail.NoticePeriod), "-- Select Notice Period --", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(r => r.CandidateDetail.NoticePeriod)
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Upload Resume</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="custom-file">
+                                                            <input class="custom-file-input" id="ResumeFile" name="ResumeFile" type="file">
+                                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                                            @Html.TextBoxFor(r => r.CandidateDetail.ResumeFileName, new { @class = "cnfile", @style = "position:absolute; top:0px; left:5px;" })
+                                                            @Html.ValidationMessageFor(r => r.CandidateDetail.ResumeFileName)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Group-->
+                                            </div>
+                                        </div>
+                                        <!--begin::Wizard Actions-->
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                            <div>
+                                                <button type="submit" style="display:inline !important" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!--end::Wizard Actions-->
+                                    </div>
+                                </div>
+
+                            }
+
+                            <!--end::Wizard Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Wizard-->
+    </div>
+</div>
+<!--end::Card-->
+        <script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#ResumeFile").change(function (e) {
+            FileUploadValidation(this);
+        });
+    });
+
+    function FileUploadValidation(elem) {
+        var file = $(elem)[0].files[0];
+        if (file) {
+            $(elem).next().html(file.name);
+            $(elem).next().removeClass('input-validation-error');
+            $(elem).parent().find('.cnfile').val(file.name);
+            $(elem).parent().find('.cnfile').blur();
+        }
+    }
+
+    function CheckFile() {
+        CheckIfFileExists($("#ResumeFile"));
+        return true;
+    }
+
+    function CheckIfFileExists(cnfile)
+     {
+          var file = $(cnfile)[0].files[0];
+          if (file)
+          {
+             $(cnfile).next().removeClass('input-validation-error');
+          }
+          else
+          {
+             $(cnfile).next().addClass('input-validation-error');
+          }
+    }
+
+        </script>
